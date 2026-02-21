@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coran Ramadan — 30 Juz en 30 Jours</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --night: #0a0d14;
+    --deep: #0f1520;
+    --card: #141b2a;
+    --card-hover: #1a2338;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a6030;
+    --teal: #2a7a6e;
+    --teal-light: #3da897;
+    --text: #d4c5a0;
+    --text-dim: #7a6e5a;
+    --white: #f5f0e8;
+    --completed: #1a3a2a;
+    --completed-border: #2a7a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--night);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* === GEOMETRIC BACKGROUND === */
+  .bg-pattern {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .bg-pattern svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+  }
+
+  .bg-glow {
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* === HEADER === */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .moon-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .arabic-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    direction: rtl;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2rem);
+    color: var(--white);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    color: var(--gold);
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* === PROGRESS BAR === */
+  .progress-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .progress-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .progress-bar-wrap {
+    width: 220px;
+    height: 6px;
+    background: rgba(201,168,76,0.15);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-count {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* === DAY TRACKER === */
+  .day-info {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(180deg, rgba(201,168,76,0.05) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .day-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 99px;
+    padding: 8px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+  }
+
+  .day-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* === GRID === */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  /* === CARDS === */
+  .juz-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 16px;
+    padding: 22px 16px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    animation: fadeInUp 0.4s ease both;
+  }
+
+  .juz-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .juz-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.08);
+  }
+
+  .juz-card:hover::before { opacity: 1; }
+
+  .juz-card.completed {
+    background: var(--completed);
+    border-color: var(--completed-border);
+  }
+
+  .juz-card.completed::after {
+    content: '✓';
+    position: absolute;
+    top: 10px; right: 12px;
+    color: #4ade80;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* Staggered animation */
+  .juz-card:nth-child(1)  { animation-delay: 0.02s; }
+  .juz-card:nth-child(2)  { animation-delay: 0.04s; }
+  .juz-card:nth-child(3)  { animation-delay: 0.06s; }
+  .juz-card:nth-child(4)  { animation-delay: 0.08s; }
+  .juz-card:nth-child(5)  { animation-delay: 0.10s; }
+  .juz-card:nth-child(6)  { animation-delay: 0.12s; }
+  .juz-card:nth-child(7)  { animation-delay: 0.14s; }
+  .juz-card:nth-child(8)  { animation-delay: 0.16s; }
+  .juz-card:nth-child(9)  { animation-delay: 0.18s; }
+  .juz-card:nth-child(10) { animation-delay: 0.20s; }
+  .juz-card:nth-child(11) { animation-delay: 0.22s; }
+  .juz-card:nth-child(12) { animation-delay: 0.24s; }
+  .juz-card:nth-child(13) { animation-delay: 0.26s; }
+  .juz-card:nth-child(14) { animation-delay: 0.28s; }
+  .juz-card:nth-child(15) { animation-delay: 0.30s; }
+  .juz-card:nth-child(n+16) { animation-delay: 0.35s; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .juz-number-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 4px;
+    direction: rtl;
+  }
+
+  .juz-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .juz-number {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .listen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 99px;
+    transition: all 0.2s;
+  }
+
+  .juz-card:hover .listen-btn {
+    background: linear-gradient(135deg, rgba(201,168,76,0.35), rgba(201,168,76,0.15));
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  .mark-done-btn {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(74,222,128,0.08);
+    border: none;
+    border-top: 1px solid rgba(74,222,128,0.15);
+    color: #4ade80;
+    font-size: 0.65rem;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 7px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .juz-card:not(.completed) .mark-done-btn:hover { background: rgba(74,222,128,0.15); }
+  .juz-card.completed .mark-done-btn {
+    background: rgba(74,222,128,0.12);
+    color: #86efac;
+  }
+
+  /* === FOOTER === */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 30px 20px 40px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-dua {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    direction: rtl;
+    margin-bottom: 12px;
+    line-height: 1.8;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-text a {
+    color: var(--teal-light);
+    text-decoration: none;
+  }
+
+  .footer-text a:hover { color: var(--gold); }
+
+  /* === MODAL === */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--deep);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 24px;
+    padding: 40px 32px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .modal h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  .modal p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .modal-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    direction: rtl;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .btn-listen {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+    color: var(--night);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: filter 0.2s;
+  }
+
+  .btn-listen:hover { filter: brightness(1.1); }
+
+  .btn-close {
+    background: none;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    padding: 10px 24px;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .btn-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .juz-number { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-glow"></div>
+<div class="bg-pattern">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="geo" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <polygon points="20,2 38,11 38,29 20,38 2,29 2,11" fill="none" stroke="#c9a84c" stroke-width="0.5"/>
+        <polygon points="20,8 32,14 32,26 20,32 8,26 8,14" fill="none" stroke="#c9a84c" stroke-width="0.3"/>
+      </pattern>
+    </defs>
+    <rect width="200" height="200" fill="url(#geo)"/>
+  </svg>
+</div>
+
+<!-- HEADER -->
+<header>
+  <span class="moon-icon">🌙</span>
+  <div class="arabic-title">القرآن الكريم — رمضان المبارك</div>
+  <h1>Coran Ramadan</h1>
+  <div class="subtitle">30 Juz · 30 Jours · 30 Nuits</div>
+  <div class="progress-section">
+    <span class="progress-label">Progression</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 30</span>
+  </div>
+</header>
+
+<!-- DAY INFO -->
+<div class="day-info">
+  <div class="day-badge">
+    <span class="day-dot"></span>
+    <span id="dayText">Chargement du jour...</span>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-dua">رَمَضَانَ مُبَارَكَ 🌙</div>
+  <div class="footer-text">
+    Que Allah vous accorde la piété, la Sakina et le succès. Amine.<br/>
+    Made with ❤️ by <a href="https://github.com/" target="_blank">Mouhamadou</a> · Open Source on GitHub
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <span class="modal-arabic" id="modalArabic"></span>
+    <h2 id="modalTitle">Juz <span id="modalNum"></span></h2>
+    <p>Cliquez ci-dessous pour écouter cette partie du Coran. Pas besoin de télécharger.</p>
+    <a href="#" id="modalLink" class="btn-listen" target="_blank">▶ Écouter maintenant</a>
+    <button class="btn-close" onclick="closeModal()">Fermer</button>
+  </div>
+</div>
+
+<script>
+  const juzData = [
+    { num: 1,  url: "http://j.mp/2b8SiNO",  arabic: "الجزء الأول" },
+    { num: 2,  url: "http://j.mp/2b8RJmQ",  arabic: "الجزء الثاني" },
+    { num: 3,  url: "http://j.mp/2bFSrtF",  arabic: "الجزء الثالث" },
+    { num: 4,  url: "http://j.mp/2b8SXi3",  arabic: "الجزء الرابع" },
+    { num: 5,  url: "http://j.mp/2b8RZm3",  arabic: "الجزء الخامس" },
+    { num: 6,  url: "http://j.mp/28MBohs",  arabic: "الجزء السادس" },
+    { num: 7,  url: "http://j.mp/2bFRIZC",  arabic: "الجزء السابع" },
+    { num: 8,  url: "http://j.mp/2bufF7o",  arabic: "الجزء الثامن" },
+    { num: 9,  url: "http://j.mp/2byr1bu",  arabic: "الجزء التاسع" },
+    { num: 10, url: "http://j.mp/2bHfyUH",  arabic: "الجزء العاشر" },
+    { num: 11, url: "http://j.mp/2bHf80y",  arabic: "الجزء الحادي عشر" },
+    { num: 12, url: "http://j.mp/2bWnTby",  arabic: "الجزء الثاني عشر" },
+    { num: 13, url: "http://j.mp/2bFTiKQ",  arabic: "الجزء الثالث عشر" },
+    { num: 14, url: "http://j.mp/2b8SUTA",  arabic: "الجزء الرابع عشر" },
+    { num: 15, url: "http://j.mp/2bFRQIM",  arabic: "الجزء الخامس عشر" },
+    { num: 16, url: "http://j.mp/2b8SegG",  arabic: "الجزء السادس عشر" },
+    { num: 17, url: "http://j.mp/2brHsFz",  arabic: "الجزء السابع عشر" },
+    { num: 18, url: "http://j.mp/2b8SCfc",  arabic: "الجزء الثامن عشر" },
+    { num: 19, url: "http://j.mp/2bFSq95",  arabic: "الجزء التاسع عشر" },
+    { num: 20, url: "http://j.mp/2brI1zc",  arabic: "الجزء العشرون" },
+    { num: 21, url: "http://j.mp/2b8VcBO",  arabic: "الجزء الحادي والعشرون" },
+    { num: 22, url: "http://j.mp/2bFRxNP",  arabic: "الجزء الثاني والعشرون" },
+    { num: 23, url: "http://j.mp/2brItxm",  arabic: "الجزء الثالث والعشرون" },
+    { num: 24, url: "http://j.mp/2brHKw5",  arabic: "الجزء الرابع والعشرون" },
+    { num: 25, url: "http://j.mp/2brImlf",  arabic: "الجزء الخامس والعشرون" },
+    { num: 26, url: "http://j.mp/2bFRHF2",  arabic: "الجزء السادس والعشرون" },
+    { num: 27, url: "http://j.mp/2bFRXno",  arabic: "الجزء السابع والعشرون" },
+    { num: 28, url: "http://j.mp/2brI3ai",  arabic: "الجزء الثامن والعشرون" },
+    { num: 29, url: "http://j.mp/2bFRyBF",  arabic: "الجزء التاسع والعشرون" },
+    { num: 30, url: "http://j.mp/2bFREcc",  arabic: "الجزء الثلاثون" },
+  ];
+
+  // Load completion state from localStorage
+  let completed = JSON.parse(localStorage.getItem('quran_ramadan_completed') || '[]');
+
+  function saveState() {
+    localStorage.setItem('quran_ramadan_completed', JSON.stringify(completed));
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = completed.length;
+    const pct = (count / 30) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = count + ' / 30';
+  }
+
+  function toggleComplete(num, e) {
+    e.stopPropagation();
+    e.preventDefault();
+    const idx = completed.indexOf(num);
+    if (idx === -1) completed.push(num);
+    else completed.splice(idx, 1);
+    saveState();
+    renderGrid();
+  }
+
+  function openModal(juz) {
+    document.getElementById('modalArabic').textContent = juz.arabic;
+    document.getElementById('modalNum').textContent = juz.num;
+    document.getElementById('modalLink').href = juz.url;
+    document.getElementById('modal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  function renderGrid() {
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    juzData.forEach(juz => {
+      const isDone = completed.includes(juz.num);
+      const card = document.createElement('div');
+      card.className = 'juz-card' + (isDone ? ' completed' : '');
+      card.innerHTML = `
+        <span class="juz-number-arabic">${juz.arabic.split(' ').slice(0,2).join(' ')}</span>
+        <span class="juz-label">Juz</span>
+        <span class="juz-number">${String(juz.num).padStart(2,'0')}</span>
+        <span class="listen-btn">▶ Écouter</span>
+        <button class="mark-done-btn" onclick="toggleComplete(${juz.num}, event)">
+          ${isDone ? '✓ Écouté' : '+ Marquer écouté'}
+        </button>
+      `;
+      card.addEventListener('click', () => openModal(juz));
+      grid.appendChild(card);
+    });
+    updateProgress();
+  }
+
+  // Day of Ramadan estimation
+  function updateDayInfo() {
+    const now = new Date();
+    const dayEl = document.getElementById('dayText');
+    // Ramadan 2025 starts around March 1 — approximate
+    const ramadanStart = new Date('2025-03-01');
+    const diffMs = now - ramadanStart;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    if (diffDays >= 0 && diffDays < 30) {
+      const d = diffDays + 1;
+      dayEl.textContent = `Jour ${d} du Ramadan — Juz recommandé : ${d}`;
+    } else if (diffDays < 0) {
+      dayEl.textContent = 'Ramadan arrive bientôt — Préparez-vous !';
+    } else {
+      dayEl.textContent = 'Que Allah accepte votre Ramadan 🤲';
+    }
+  }
+
+  renderGrid();
+  updateDayInfo();
+</script>
+</body>
+</html>
