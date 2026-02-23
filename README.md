@@ -49,7 +49,6 @@ Application islamique complète — Coran, Invocations et Adhkar.
 - 📴 Mode hors ligne (PWA)
 - 🔔 Notifications toast
 - ⌨️ Raccourcis clavier (Espace, flèches)
-- .......etc
 
 ---
 
@@ -111,6 +110,7 @@ Application islamique complète — Coran, Invocations et Adhkar.
 - [ ] 🔊 Plus de récitateurs
 - [ ] 🌐 Plus de langues de traduction
 - [ ] 📥 Téléchargement hors ligne des sourates
+- [ ] ........etc
 
 ---
 
