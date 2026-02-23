@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<title>Dhikr & Tasbih — الذكر والتسبيح</title>
+<meta name="description" content="Compteur de Dhikr et Tasbih numérique"/>
+<meta name="theme-color" content="#0a0d14"/>
+<link rel="manifest" href="manifest.json"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.dhikr-grid{max-width:700px;margin:0 auto;padding:20px 16px 60px;display:grid;grid-template-columns:1fr;gap:14px;}
+.dhikr-card{background:var(--card);border:1px solid rgba(42,122,110,.12);border-radius:var(--radius);padding:20px;transition:all .2s;position:relative;overflow:hidden;}
+.dhikr-card.completed-card{border-color:var(--green);background:var(--completed);}
+.dhikr-card-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
+.dhikr-card-num{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(42,122,110,.15);border:1px solid rgba(42,122,110,.25);border-radius:50%;font-family:'Cinzel',serif;font-size:.7rem;color:var(--teal-light);flex-shrink:0;}
+.dhikr-card-info{flex:1;min-width:0;}
+.dhikr-card-title{font-family:'Amiri',serif;font-size:.85rem;color:var(--gold);margin-bottom:2px;}
+.dhikr-card-virtue{font-size:.68rem;color:var(--text-dim);line-height:1.4;}
+.dhikr-arabic{font-family:'Amiri',serif;font-size:clamp(1.3rem,4vw,1.7rem);color:var(--white);direction:rtl;text-align:center;line-height:2.2;padding:16px 10px;background:rgba(201,168,76,.04);border-radius:12px;margin-bottom:14px;}
+.dhikr-translation{font-size:.82rem;color:var(--text-dim);text-align:center;line-height:1.6;margin-bottom:14px;font-style:italic;}
+
+/* BIG COUNTER */
+.counter-area{display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:12px;border-top:1px solid rgba(201,168,76,.08);}
+.counter-big-btn{width:80px;height:80px;border-radius:50%;border:3px solid rgba(42,122,110,.4);background:linear-gradient(135deg,rgba(42,122,110,.2),rgba(42,122,110,.08));color:var(--teal-light);font-size:2rem;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-tap-highlight-color:transparent;}
+.counter-big-btn:hover{border-color:var(--teal-light);background:linear-gradient(135deg,rgba(42,122,110,.3),rgba(42,122,110,.15));transform:scale(1.05);}
+.counter-big-btn:active{transform:scale(0.95);}
+.counter-big-btn.done-btn{border-color:var(--green);background:rgba(74,222,128,.15);color:var(--green);}
+.counter-numbers{display:flex;align-items:baseline;gap:4px;}
+.counter-current{font-family:'Cinzel',serif;font-size:2rem;color:var(--white);font-weight:700;}
+.counter-slash{font-size:1rem;color:var(--text-dim);}
+.counter-total{font-family:'Cinzel',serif;font-size:1rem;color:var(--text-dim);}
+.counter-progress{width:120px;height:4px;background:rgba(42,122,110,.15);border-radius:99px;overflow:hidden;}
+.counter-progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:99px;transition:width .3s;}
+.counter-reset{background:none;border:none;color:var(--text-dim);font-size:.65rem;padding:4px 10px;transition:color .2s;}
+.counter-reset:hover{color:var(--gold);}
+
+/* Categories */
+.dhikr-cats{max-width:700px;margin:0 auto;padding:20px 20px 60px;display:grid;grid-template-columns:1fr;gap:12px;}
+.dhikr-cat-card{background:var(--card);border:1px solid rgba(42,122,110,.12);border-radius:var(--radius);padding:18px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .3s;}
+.dhikr-cat-card:hover{background:var(--card-hover);border-color:rgba(42,122,110,.3);transform:translateX(4px);}
+.dhikr-cat-icon{font-size:2.2rem;flex-shrink:0;}
+.dhikr-cat-info{flex:1;}
+.dhikr-cat-ar{font-family:'Amiri',serif;font-size:1.15rem;color:var(--gold-light);direction:rtl;text-align:right;}
+.dhikr-cat-name{font-size:.78rem;color:var(--text-dim);margin-top:2px;}
+.dhikr-cat-progress{text-align:right;flex-shrink:0;}
+.dhikr-cat-pct{font-family:'Cinzel',serif;font-size:.85rem;color:var(--teal-light);font-weight:600;}
+.dhikr-cat-label{font-size:.6rem;color:var(--text-dim);}
+
+/* Summary */
+.cat-summary{text-align:center;padding:14px 20px 6px;max-width:700px;margin:0 auto;}
+.cat-summary-text{font-family:'Cinzel',serif;font-size:.75rem;color:var(--teal-light);letter-spacing:.08em;}
+.cat-summary-bar{width:200px;height:4px;background:rgba(42,122,110,.15);border-radius:99px;overflow:hidden;margin:8px auto 0;}
+.cat-summary-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:99px;transition:width .5s;}
+.reset-all{text-align:center;padding:6px 20px 20px;}
+.reset-all-btn{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.12);color:var(--text-dim);font-size:.7rem;padding:8px 18px;border-radius:8px;transition:all .2s;}
+.reset-all-btn:hover{color:var(--gold);border-color:var(--gold);}
+
+/* Celebration */
+.celebrate{position:fixed;inset:0;background:rgba(10,13,20,.92);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;backdrop-filter:blur(6px);}
+.celebrate.show{display:flex;}
+.celebrate-icon{font-size:4rem;animation:float 3s ease-in-out infinite;}
+.celebrate-text{font-family:'Amiri',serif;font-size:1.4rem;color:var(--gold-light);text-align:center;direction:rtl;}
+.celebrate-sub{font-size:.85rem;color:var(--text-dim);text-align:center;max-width:280px;}
+.celebrate-btn{background:var(--gold);color:var(--night);border:none;padding:12px 28px;border-radius:12px;font-family:'Cinzel',serif;font-size:.85rem;font-weight:700;margin-top:8px;}
+
+@media(max-width:480px){
+  .counter-big-btn{width:70px;height:70px;font-size:1.6rem;}
+  .counter-current{font-size:1.6rem;}
+  .dhikr-arabic{font-size:1.2rem;padding:12px 8px;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+<div class="bg-pattern">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs><pattern id="geo" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <polygon points="20,2 38,11 38,29 20,38 2,29 2,11" fill="none" stroke="#c9a84c" stroke-width="0.5"/>
+      <polygon points="20,8 32,14 32,26 20,32 8,26 8,14" fill="none" stroke="#c9a84c" stroke-width="0.3"/>
+    </pattern></defs>
+    <rect width="200" height="200" fill="url(#geo)"/>
+  </svg>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="celebrate" id="celebrate">
+  <div class="celebrate-icon">🎉</div>
+  <div class="celebrate-text">تَقَبَّلَ اللَّهُ مِنَّا وَمِنكُم</div>
+  <div class="celebrate-sub">Tous les dhikr de cette catégorie sont terminés !<br>Qu'Allah accepte de nous et de vous.</div>
+  <button class="celebrate-btn" onclick="closeCelebrate()">الحمد لله</button>
+</div>
+
+<div class="section-header">
+  <a href="index.html" class="sec-back" id="back-btn">← Accueil</a>
+  <div class="sec-title-area">
+    <div class="sec-title" id="page-title">الذكر والتسبيح</div>
+    <div class="sec-subtitle" id="page-subtitle">Dhikr & Tasbih</div>
+  </div>
+  <div class="sec-actions"></div>
+</div>
+
+<div id="summary-area"></div>
+<div id="content"></div>
+<div id="reset-area"></div>
+
+<footer id="page-footer">
+  <div class="footer-dua">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ 📿</div>
+  <div class="footer-credit">Made with ❤️ by <a href="https://github.com/lem2003" target="_blank">Mouhamadou</a></div>
+</footer>
+
+<script>
+/* ================================================================
+   DHIKR DATA — Short formulas to COUNT
+   ================================================================ */
+var CATEGORIES = [
+  {id:'after_salah', icon:'🕌', ar:'تسبيح بعد الصلاة', fr:'Après la Prière', desc:'SubhanAllah, Alhamdulillah, Allahu Akbar'},
+  {id:'morning_dhikr', icon:'🌅', ar:'أذكار الصباح', fr:'Dhikr du Matin', desc:'Tasbih et dhikr du matin'},
+  {id:'evening_dhikr', icon:'🌆', ar:'أذكار المساء', fr:'Dhikr du Soir', desc:'Tasbih et dhikr du soir'},
+  {id:'anytime', icon:'📿', ar:'ذكر في أي وقت', fr:'À tout moment', desc:'Dhikr recommandé à tout moment'},
+];
+
+var DHIKR = [
+  // AFTER SALAH
+  {cat:'after_salah', ar:'سُبْحَانَ اللَّهِ', fr:'Gloire à Allah', virtue:'Tasbih après chaque prière', src:'Muslim', count:33},
+  {cat:'after_salah', ar:'الْحَمْدُ لِلَّهِ', fr:'Louange à Allah', virtue:'Tahmid après chaque prière', src:'Muslim', count:33},
+  {cat:'after_salah', ar:'اللَّهُ أَكْبَرُ', fr:'Allah est le Plus Grand', virtue:'Takbir après chaque prière', src:'Muslim', count:34},
+
+  // MORNING
+  {cat:'morning_dhikr', ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', fr:'Gloire et louange à Allah', virtue:'Celui qui dit cela 100x le matin, ses péchés seront effacés même s\'ils sont comme l\'écume de la mer.', src:'Al-Bukhari & Muslim', count:100},
+  {cat:'morning_dhikr', ar:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', fr:'Il n\'y a de divinité qu\'Allah seul, sans associé...', virtue:'Comme affranchir 10 esclaves, 10 bonnes actions, 10 péchés effacés, protection contre Shaytan.', src:'Al-Bukhari & Muslim', count:10},
+  {cat:'morning_dhikr', ar:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ', fr:'Ô Allah, accorde Ta grâce et Ta paix à notre Prophète Muhammad ﷺ', virtue:'Celui qui prie sur le Prophète ﷺ, Allah priera sur lui 10 fois.', src:'Muslim', count:10},
+
+  // EVENING
+  {cat:'evening_dhikr', ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', fr:'Gloire et louange à Allah', virtue:'Celui qui dit cela 100x le soir, ses péchés seront effacés.', src:'Al-Bukhari & Muslim', count:100},
+  {cat:'evening_dhikr', ar:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', fr:'Il n\'y a de divinité qu\'Allah seul, sans associé...', virtue:'Protection et récompense immense.', src:'Al-Bukhari & Muslim', count:10},
+  {cat:'evening_dhikr', ar:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ', fr:'Salat sur le Prophète ﷺ', virtue:'Celui qui prie sur moi 10 fois le soir, mon intercession lui sera acquise.', src:'At-Tirmidhi', count:10},
+
+  // ANYTIME
+  {cat:'anytime', ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ سُبْحَانَ اللَّهِ الْعَظِيمِ', fr:'Gloire et louange à Allah, Gloire à Allah le Très Grand', virtue:'Deux paroles légères sur la langue, lourdes dans la balance, aimées du Tout Miséricordieux.', src:'Al-Bukhari & Muslim', count:100},
+  {cat:'anytime', ar:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ', fr:'Je demande pardon à Allah et je me repens à Lui', virtue:'Le Prophète ﷺ demandait pardon plus de 70 fois par jour.', src:'Al-Bukhari', count:100},
+  {cat:'anytime', ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ', fr:'Il n\'y a de force ni de puissance qu\'en Allah', virtue:'C\'est un trésor parmi les trésors du Paradis.', src:'Al-Bukhari & Muslim', count:100},
+  {cat:'anytime', ar:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ', fr:'Prière sur le Prophète ﷺ', virtue:'Le jour le plus méritoire pour la salat sur le Prophète est le vendredi.', src:'Abu Dawud', count:100},
+  {cat:'anytime', ar:'سُبْحَانَ اللَّهِ', fr:'Gloire à Allah', virtue:'', src:'', count:33},
+  {cat:'anytime', ar:'الْحَمْدُ لِلَّهِ', fr:'Louange à Allah', virtue:'', src:'', count:33},
+  {cat:'anytime', ar:'اللَّهُ أَكْبَرُ', fr:'Allah est le Plus Grand', virtue:'', src:'', count:33},
+  {cat:'anytime', ar:'لَا إِلَهَ إِلَّا اللَّهُ', fr:'Il n\'y a de divinité qu\'Allah', virtue:'La meilleure parole que j\'ai dite, moi et les prophètes avant moi.', src:'At-Tirmidhi', count:100},
+];
+
+// Counts
+CATEGORIES.forEach(function(cat){cat.count=DHIKR.filter(function(d){return d.cat===cat.id;}).length;});
+
+/* ================================================================
+   STATE
+   ================================================================ */
+var counters = JSON.parse(localStorage.getItem('q_counters') || '{}');
+var currentCat = null;
+
+function saveCounters(){localStorage.setItem('q_counters',JSON.stringify(counters));}
+function showToast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3000);}
+function closeCelebrate(){document.getElementById('celebrate').classList.remove('show');}
+
+/* ================================================================
+   RENDER CATEGORIES
+   ================================================================ */
+function renderCategories(){
+  currentCat=null;
+  document.getElementById('page-title').textContent='الذكر والتسبيح';
+  document.getElementById('page-subtitle').textContent='Dhikr & Tasbih';
+  document.getElementById('back-btn').href='index.html';
+  document.getElementById('back-btn').textContent='← Accueil';
+  document.getElementById('back-btn').onclick=null;
+  document.getElementById('page-footer').style.display='';
+  document.getElementById('summary-area').innerHTML='';
+  document.getElementById('reset-area').innerHTML='';
+
+  var content=document.getElementById('content');content.innerHTML='';
+  var wrap=document.createElement('div');wrap.className='dhikr-cats';
+
+  CATEGORIES.forEach(function(cat){
+    var items=DHIKR.filter(function(d){return d.cat===cat.id;});
+    var done=0;
+    items.forEach(function(item,i){var k=cat.id+'_'+i;if((counters[k]||0)>=item.count)done++;});
+    var pct=items.length>0?Math.round(done/items.length*100):0;
+
+    var el=document.createElement('div');el.className='dhikr-cat-card';
+    el.innerHTML='<span class="dhikr-cat-icon">'+cat.icon+'</span><div class="dhikr-cat-info"><div class="dhikr-cat-ar">'+cat.ar+'</div><div class="dhikr-cat-name">'+cat.fr+' — '+cat.desc+'</div></div><div class="dhikr-cat-progress"><div class="dhikr-cat-pct">'+pct+'%</div><div class="dhikr-cat-label">'+done+'/'+items.length+'</div></div>';
+    el.addEventListener('click',function(){openCategory(cat);});
+    wrap.appendChild(el);
+  });
+  content.appendChild(wrap);
+}
+
+/* ================================================================
+   OPEN CATEGORY — Shows big counters
+   ================================================================ */
+function openCategory(cat){
+  currentCat=cat;
+  document.getElementById('page-title').textContent=cat.ar;
+  document.getElementById('page-subtitle').textContent=cat.fr;
+  document.getElementById('page-footer').style.display='none';
+
+  var backBtn=document.getElementById('back-btn');
+  backBtn.href='#';backBtn.textContent='← Retour';
+  backBtn.onclick=function(e){e.preventDefault();renderCategories();};
+
+  renderDhikrList();
+  window.scrollTo(0,0);
+}
+
+function renderDhikrList(){
+  if(!currentCat)return;
+  var items=DHIKR.filter(function(d){return d.cat===currentCat.id;});
+
+  // Summary
+  var done=0;
+  items.forEach(function(item,i){var k=currentCat.id+'_'+i;if((counters[k]||0)>=item.count)done++;});
+  var pct=items.length>0?Math.round(done/items.length*100):0;
+  document.getElementById('summary-area').innerHTML='<div class="cat-summary"><div class="cat-summary-text">'+done+' / '+items.length+' terminés ('+pct+'%)</div><div class="cat-summary-bar"><div class="cat-summary-fill" style="width:'+pct+'%"></div></div></div>';
+
+  // List
+  var content=document.getElementById('content');content.innerHTML='';
+  var list=document.createElement('div');list.className='dhikr-grid';
+
+  items.forEach(function(dhikr,i){
+    var key=currentCat.id+'_'+i;
+    var val=counters[key]||0;
+    var target=dhikr.count;
+    var isDone=val>=target;
+
+    var card=document.createElement('div');
+    card.className='dhikr-card'+(isDone?' completed-card':'');
+    card.id='card-'+key;
+
+    var html='<div class="dhikr-card-header"><div class="dhikr-card-num">'+(i+1)+'</div><div class="dhikr-card-info">';
+    if(dhikr.fr)html+='<div class="dhikr-card-title">'+dhikr.fr+'</div>';
+    if(dhikr.virtue)html+='<div class="dhikr-card-virtue">'+dhikr.virtue+'</div>';
+    html+='</div></div>';
+    html+='<div class="dhikr-arabic">'+dhikr.ar+'</div>';
+    if(dhikr.src)html+='<div class="dhikr-translation">📚 '+dhikr.src+'</div>';
+
+    // Counter
+    html+='<div class="counter-area">';
+    html+='<button class="counter-big-btn'+(isDone?' done-btn':'')+'" id="btn-'+key+'" onclick="countUp(\''+key+'\','+target+')">'+( isDone?'✓':'+')+'</button>';
+    html+='<div class="counter-numbers"><span class="counter-current" id="num-'+key+'">'+Math.min(val,target)+'</span><span class="counter-slash">/</span><span class="counter-total">'+target+'</span></div>';
+    html+='<div class="counter-progress"><div class="counter-progress-fill" id="bar-'+key+'" style="width:'+(Math.min(val/target*100,100))+'%"></div></div>';
+    html+='<button class="counter-reset" onclick="resetOne(\''+key+'\','+target+')">↻ Réinitialiser</button>';
+    html+='</div>';
+
+    card.innerHTML=html;
+    list.appendChild(card);
+  });
+  content.appendChild(list);
+
+  // Reset all
+  document.getElementById('reset-area').innerHTML='<div class="reset-all"><button class="reset-all-btn" onclick="resetAll()">🔄 Réinitialiser tous les compteurs</button></div>';
+}
+
+/* ================================================================
+   COUNT
+   ================================================================ */
+function countUp(key,target){
+  var val=(counters[key]||0)+1;
+  if(val>target)return; // Already done
+  counters[key]=val;
+  saveCounters();
+
+  // Update UI
+  document.getElementById('num-'+key).textContent=val;
+  document.getElementById('bar-'+key).style.width=(val/target*100)+'%';
+
+  if(val>=target){
+    var btn=document.getElementById('btn-'+key);
+    btn.classList.add('done-btn');btn.textContent='✓';
+    var card=document.getElementById('card-'+key);
+    if(card)card.classList.add('completed-card');
+
+    // Check all done
+    var items=DHIKR.filter(function(d){return d.cat===currentCat.id;});
+    var allDone=true;
+    items.forEach(function(item,i){var k=currentCat.id+'_'+i;if((counters[k]||0)<item.count)allDone=false;});
+    if(allDone)setTimeout(function(){document.getElementById('celebrate').classList.add('show');},400);
+
+    // Update summary
+    renderDhikrList();
+  }
+}
+
+function resetOne(key,target){
+  counters[key]=0;saveCounters();
+  document.getElementById('num-'+key).textContent='0';
+  document.getElementById('bar-'+key).style.width='0%';
+  var btn=document.getElementById('btn-'+key);
+  btn.classList.remove('done-btn');btn.textContent='+';
+  var card=document.getElementById('card-'+key);
+  if(card)card.classList.remove('completed-card');
+  renderDhikrList();
+}
+
+function resetAll(){
+  if(!currentCat||!confirm('Réinitialiser tous les compteurs ?'))return;
+  var items=DHIKR.filter(function(d){return d.cat===currentCat.id;});
+  items.forEach(function(item,i){counters[currentCat.id+'_'+i]=0;});
+  saveCounters();
+  renderDhikrList();
+  showToast('🔄 Compteurs réinitialisés');
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+var params=new URLSearchParams(window.location.search);
+var catParam=params.get('cat');
+if(catParam){var f=CATEGORIES.find(function(c){return c.id===catParam;});if(f)openCategory(f);else renderCategories();}
+else renderCategories();
+</script>
+</body>
+</html>
