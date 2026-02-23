@@ -11,168 +11,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css"/>
 <style>
-/* Extra styles only for index page */
-.settings-section {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 0 20px 10px;
-}
-
-.settings-card {
-  background: var(--card);
-  border: 1px solid rgba(201,168,76,.15);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 16px;
-}
-
-.settings-card-title {
-  font-family: 'Cinzel', serif;
-  font-size: .8rem;
-  color: var(--gold-light);
-  letter-spacing: .1em;
-  margin-bottom: 14px;
-  text-align: center;
-}
-
-.settings-card .setting-group {
-  margin-bottom: 14px;
-}
-
-.settings-card .setting-group:last-child {
-  margin-bottom: 0;
-}
-
-.settings-card .setting-label {
-  font-size: .72rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.settings-card .setting-select {
-  width: 100%;
-  background: var(--deep);
-  border: 1px solid rgba(201,168,76,.2);
-  border-radius: 10px;
-  padding: 11px 12px;
-  color: var(--white);
-  font-size: .88rem;
-  outline: none;
-  appearance: none;
-  cursor: pointer;
-}
-
-.settings-card .setting-select:focus {
-  border-color: var(--gold);
-}
-
-.settings-card .setting-select option {
-  background: var(--deep);
-  color: var(--white);
-}
-
-.test-reciter-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.test-btn {
-  background: linear-gradient(135deg, rgba(201,168,76,.2), rgba(201,168,76,.08));
-  border: 1px solid rgba(201,168,76,.3);
-  color: var(--gold);
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: .75rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all .2s;
-  flex: 1;
-  justify-content: center;
-}
-
-.test-btn:hover {
-  background: linear-gradient(135deg, rgba(201,168,76,.35), rgba(201,168,76,.15));
-  border-color: var(--gold);
-}
-
-.test-btn.playing-test {
-  background: rgba(74,222,128,.15);
-  border-color: var(--green);
-  color: var(--green);
-}
-
-.stop-btn {
-  background: rgba(201,168,76,.08);
-  border: 1px solid rgba(201,168,76,.15);
-  color: var(--text-dim);
-  padding: 8px 14px;
-  border-radius: 10px;
-  font-size: .75rem;
-  transition: all .2s;
-}
-
-.stop-btn:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-}
-
-.test-status {
-  font-size: .68rem;
-  color: var(--text-dim);
-  text-align: center;
-  margin-top: 6px;
-  min-height: 16px;
-}
-
-.reciter-preview {
-  font-family: 'Amiri', serif;
-  font-size: .85rem;
-  color: var(--gold);
-  text-align: center;
-  direction: rtl;
-  padding: 8px;
-  background: rgba(201,168,76,.05);
-  border-radius: 8px;
-  margin-top: 8px;
-}
-
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 500px;
-  margin: 10px auto 0;
-  padding: 0 20px;
-}
-
-.section-divider span {
-  font-family: 'Cinzel', serif;
-  font-size: .7rem;
-  color: var(--text-dim);
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.section-divider::before,
-.section-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(201,168,76,.12);
-}
+.settings-section{max-width:500px;margin:0 auto;padding:0 20px 10px;}
+.settings-card{background:var(--card);border:1px solid rgba(201,168,76,.15);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+.settings-card-title{font-family:'Cinzel',serif;font-size:.8rem;color:var(--gold-light);letter-spacing:.1em;margin-bottom:14px;text-align:center;}
+.settings-card .setting-group{margin-bottom:14px;}
+.settings-card .setting-group:last-child{margin-bottom:0;}
+.settings-card .setting-label{font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:block;}
+.settings-card .setting-select{width:100%;background:var(--deep);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:11px 12px;color:var(--white);font-size:.85rem;outline:none;appearance:none;cursor:pointer;}
+.settings-card .setting-select:focus{border-color:var(--gold);}
+.settings-card .setting-select option{background:var(--deep);color:var(--white);}
+.test-reciter-wrap{display:flex;align-items:center;gap:10px;margin-top:10px;}
+.test-btn{background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.08));border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:8px 16px;border-radius:10px;font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:6px;transition:all .2s;flex:1;justify-content:center;}
+.test-btn:hover{background:linear-gradient(135deg,rgba(201,168,76,.35),rgba(201,168,76,.15));border-color:var(--gold);}
+.test-btn.playing-test{background:rgba(74,222,128,.15);border-color:var(--green);color:var(--green);}
+.test-btn.loading-test{background:rgba(201,168,76,.15);color:var(--gold-dim);}
+.stop-btn{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);color:var(--text-dim);padding:8px 14px;border-radius:10px;font-size:.75rem;transition:all .2s;}
+.stop-btn:hover{color:var(--gold);border-color:var(--gold);}
+.test-status{font-size:.68rem;color:var(--text-dim);text-align:center;margin-top:6px;min-height:16px;}
+.reciter-preview{font-family:'Amiri',serif;font-size:.85rem;color:var(--gold);text-align:center;direction:rtl;padding:8px;background:rgba(201,168,76,.05);border-radius:8px;margin-top:8px;}
+.section-divider{display:flex;align-items:center;gap:14px;max-width:500px;margin:10px auto 0;padding:0 20px;}
+.section-divider span{font-family:'Cinzel',serif;font-size:.7rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;}
+.section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.12);}
 </style>
 </head>
 <body>
 
-<!-- Background -->
 <div class="bg-glow"></div>
 <div class="bg-pattern">
   <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -184,12 +47,9 @@
   </svg>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ================================ -->
-<!-- HOME HERO                        -->
-<!-- ================================ -->
+<!-- HOME HERO -->
 <div class="home-hero">
   <span class="moon-icon">🌙</span>
   <div class="home-greeting" id="greeting"></div>
@@ -198,9 +58,7 @@
   <div class="home-tagline">Coran · Invocations · Adhkar</div>
 </div>
 
-<!-- ================================ -->
-<!-- VERSE OF THE DAY                 -->
-<!-- ================================ -->
+<!-- VERSE OF THE DAY -->
 <div class="verse-of-day">
   <div class="verse-of-day-label">✦ Verset du jour ✦</div>
   <div class="verse-of-day-ar" id="vod-ar"></div>
@@ -208,9 +66,7 @@
   <div class="verse-of-day-ref" id="vod-ref"></div>
 </div>
 
-<!-- ================================ -->
-<!-- FEATURE CARDS                    -->
-<!-- ================================ -->
+<!-- FEATURE CARDS -->
 <div class="features">
   <a href="quran.html" class="feature-card card-quran">
     <span class="feature-icon">📖</span>
@@ -239,15 +95,10 @@
   </div>
 </div>
 
-<!-- ================================ -->
-<!-- SETTINGS ON HOME                 -->
-<!-- ================================ -->
-<div class="section-divider">
-  <span>⚙️ Paramètres</span>
-</div>
+<!-- SETTINGS -->
+<div class="section-divider"><span>⚙️ Paramètres</span></div>
 
 <div class="settings-section">
-  <!-- Reciter -->
   <div class="settings-card">
     <div class="settings-card-title">🎙️ Récitateur</div>
     <div class="setting-group">
@@ -258,21 +109,21 @@
         <option value="ar.abdurrahmaansudais">Abdurrahman As-Sudais</option>
         <option value="ar.husary">Mahmoud Khalil Al-Husary</option>
         <option value="ar.minshawimujawwad">El-Minshawi (Mujawwad)</option>
+        <option value="ar.hudhaify">Ali Al-Hudhaify</option>
+        <option value="ar.muhammadayyoub">Muhammad Ayyoub</option>
+        <option value="ar.muhammadjibreel">Muhammad Jibreel</option>
+        <option value="ar.hanirifai">Hani Ar-Rifai</option>
+        <option value="ar.ibrahimakhdar">Ibrahim Al-Akhdar</option>
       </select>
     </div>
     <div class="test-reciter-wrap">
-      <button class="test-btn" id="test-btn" onclick="testReciter()">
-        🔊 Tester le récitateur
-      </button>
+      <button class="test-btn" id="test-btn" onclick="testReciter()">🔊 Tester le récitateur</button>
       <button class="stop-btn" onclick="stopTest()">⏹ Stop</button>
     </div>
     <div class="test-status" id="test-status"></div>
-    <div class="reciter-preview">
-      بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
-    </div>
+    <div class="reciter-preview">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ</div>
   </div>
 
-  <!-- Translation -->
   <div class="settings-card">
     <div class="settings-card-title">🌍 Traduction</div>
     <div class="setting-group">
@@ -286,74 +137,45 @@
   </div>
 </div>
 
-<!-- ================================ -->
-<!-- STATS                            -->
-<!-- ================================ -->
+<!-- STATS -->
 <div class="home-stats">
-  <div class="stat-item">
-    <div class="stat-num" id="stat-juz">0</div>
-    <div class="stat-label">Juz lus</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">114</div>
-    <div class="stat-label">Sourates</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">6236</div>
-    <div class="stat-label">Versets</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num" id="stat-dhikr">0</div>
-    <div class="stat-label">Adhkar faits</div>
-  </div>
+  <div class="stat-item"><div class="stat-num" id="stat-juz">0</div><div class="stat-label">Juz lus</div></div>
+  <div class="stat-item"><div class="stat-num">114</div><div class="stat-label">Sourates</div></div>
+  <div class="stat-item"><div class="stat-num">6236</div><div class="stat-label">Versets</div></div>
+  <div class="stat-item"><div class="stat-num" id="stat-dhikr">0</div><div class="stat-label">Adhkar</div></div>
 </div>
 
-<!-- ================================ -->
-<!-- FOOTER                           -->
-<!-- ================================ -->
 <footer>
   <div class="footer-dua">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ 🤲</div>
-  <div class="footer-credit">
-    Made with ❤️ by <a href="https://github.com/lem2003" target="_blank">Mouhamadou</a> · Sadaqa Jariya
-  </div>
+  <div class="footer-credit">Made with ❤️ by <a href="https://github.com/lem2003" target="_blank">Mouhamadou</a> · Sadaqa Jariya</div>
 </footer>
 
-<!-- Hidden test audio -->
 <audio id="test-audio" preload="none"></audio>
 
 <script>
 /* ================================================
-   VERSE OF THE DAY DATA
-   ================================================ */
-var VOD = [
-  {ar:'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ', fr:'Et quand Mes serviteurs t\'interrogent sur Moi, Je suis tout proche. Je réponds à l\'appel de celui qui M\'invoque.', ref:'Sourate Al-Baqarah 2:186'},
-  {ar:'إِنَّ مَعَ الْعُسْرِ يُسْرًا', fr:'Certes, avec la difficulté il y a une facilité.', ref:'Sourate Ash-Sharh 94:6'},
-  {ar:'وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ', fr:'Et quiconque craint Allah, Il lui donnera une issue et lui accordera Ses dons d\'où il ne s\'y attend pas.', ref:'Sourate At-Talaq 65:2-3'},
-  {ar:'وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ', fr:'Ton Seigneur t\'accordera certes Ses dons, et tu seras satisfait.', ref:'Sourate Ad-Duha 93:5'},
-  {ar:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ', fr:'Souvenez-vous de Moi, Je Me souviendrai de vous. Soyez reconnaissants et ne soyez pas ingrats.', ref:'Sourate Al-Baqarah 2:152'},
-  {ar:'وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ', fr:'Nous faisons descendre du Coran ce qui est guérison et miséricorde pour les croyants.', ref:'Sourate Al-Isra 17:82'},
-  {ar:'رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا', fr:'Seigneur, ne nous châtie pas si nous oublions ou si nous commettons une erreur.', ref:'Sourate Al-Baqarah 2:286'},
-  {ar:'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا', fr:'Allah n\'impose à aucune âme une charge supérieure à sa capacité.', ref:'Sourate Al-Baqarah 2:286'},
-  {ar:'وَقُل رَّبِّ زِدْنِي عِلْمًا', fr:'Et dis : Seigneur, accrois mes connaissances.', ref:'Sourate Taha 20:114'},
-  {ar:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ', fr:'Certes, Allah est avec les patients.', ref:'Sourate Al-Baqarah 2:153'},
-];
-
-/* ================================================
-   RECITER TEST DATA
+   DATA
    ================================================ */
 var RECITER_NAMES = {
-  'ar.alafasy': 'Mishary Rashid Alafasy',
-  'ar.abdulbasitmurattal': 'Abdul Basit (Murattal)',
-  'ar.abdurrahmaansudais': 'Abdurrahman As-Sudais',
-  'ar.husary': 'Mahmoud Khalil Al-Husary',
-  'ar.minshawimujawwad': 'El-Minshawi (Mujawwad)'
+  'ar.alafasy':'Mishary Rashid Alafasy','ar.abdulbasitmurattal':'Abdul Basit (Murattal)',
+  'ar.abdurrahmaansudais':'Abdurrahman As-Sudais','ar.husary':'Mahmoud Khalil Al-Husary',
+  'ar.minshawimujawwad':'El-Minshawi (Mujawwad)','ar.hudhaify':'Ali Al-Hudhaify',
+  'ar.muhammadayyoub':'Muhammad Ayyoub','ar.muhammadjibreel':'Muhammad Jibreel',
+  'ar.hanirifai':'Hani Ar-Rifai','ar.ibrahimakhdar':'Ibrahim Al-Akhdar'
 };
 
-// Test ayahs: Al-Fatiha verses 1-4
-var TEST_AYAHS = [1, 2, 3, 4, 5, 6, 7];
-var testAudioEl = document.getElementById('test-audio');
-var testIdx = 0;
-var isTesting = false;
+var VOD = [
+  {ar:'وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ',fr:'Et quand Mes serviteurs t\'interrogent sur Moi, Je suis tout proche. Je réponds à l\'appel de celui qui M\'invoque.',ref:'Al-Baqarah 2:186'},
+  {ar:'إِنَّ مَعَ الْعُسْرِ يُسْرًا',fr:'Certes, avec la difficulté il y a une facilité.',ref:'Ash-Sharh 94:6'},
+  {ar:'وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ',fr:'Et quiconque craint Allah, Il lui donnera une issue et lui accordera Ses dons d\'où il ne s\'y attend pas.',ref:'At-Talaq 65:2-3'},
+  {ar:'وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَىٰ',fr:'Ton Seigneur t\'accordera certes Ses dons, et tu seras satisfait.',ref:'Ad-Duha 93:5'},
+  {ar:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ',fr:'Souvenez-vous de Moi, Je Me souviendrai de vous.',ref:'Al-Baqarah 2:152'},
+  {ar:'وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ',fr:'Nous faisons descendre du Coran ce qui est guérison et miséricorde pour les croyants.',ref:'Al-Isra 17:82'},
+  {ar:'لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا',fr:'Allah n\'impose à aucune âme une charge supérieure à sa capacité.',ref:'Al-Baqarah 2:286'},
+  {ar:'وَقُل رَّبِّ زِدْنِي عِلْمًا',fr:'Et dis : Seigneur, accrois mes connaissances.',ref:'Taha 20:114'},
+  {ar:'إِنَّ اللَّهَ مَعَ الصَّابِرِينَ',fr:'Certes, Allah est avec les patients.',ref:'Al-Baqarah 2:153'},
+  {ar:'رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا',fr:'Seigneur, ne nous châtie pas si nous oublions ou commettons une erreur.',ref:'Al-Baqarah 2:286'},
+];
 
 /* ================================================
    SETTINGS
@@ -361,78 +183,100 @@ var isTesting = false;
 function onReciterChange(val) {
   localStorage.setItem('q_rec', val);
   stopTest();
-  showToast('🎙️ Récitateur : ' + RECITER_NAMES[val]);
+  showToast('🎙️ ' + RECITER_NAMES[val]);
 }
 
 function onTranslationChange(val) {
   localStorage.setItem('q_tr', val);
-  var names = {
-    'fr.hamidullah': '🇫🇷 Français',
-    'en.sahih': '🇬🇧 English (Sahih)',
-    'en.pickthall': '🇬🇧 English (Pickthall)'
-  };
-  showToast('🌍 Traduction : ' + (names[val] || val));
+  var names = {'fr.hamidullah':'🇫🇷 Français','en.sahih':'🇬🇧 English (Sahih)','en.pickthall':'🇬🇧 English (Pickthall)'};
+  showToast('🌍 ' + (names[val] || val));
 }
 
 /* ================================================
-   RECITER TEST
+   RECITER TEST — Uses API for guaranteed URLs!
    ================================================ */
+var testAudioEl = document.getElementById('test-audio');
+var testAudioUrls = [];
+var testIdx = 0;
+var isTesting = false;
+
 function testReciter() {
   var reciter = document.getElementById('select-reciter').value;
-  var cdn = 'https://cdn.islamic.network/quran/audio/128';
-  
   stopTest();
   isTesting = true;
   testIdx = 0;
 
-  document.getElementById('test-btn').classList.add('playing-test');
-  document.getElementById('test-btn').innerHTML = '🔊 En cours d\'écoute...';
-  document.getElementById('test-status').textContent = '▶ Al-Fatiha — ' + RECITER_NAMES[reciter];
+  var btn = document.getElementById('test-btn');
+  btn.classList.add('loading-test');
+  btn.innerHTML = '⏳ Chargement...';
+  document.getElementById('test-status').textContent = 'Chargement de Al-Fatiha...';
 
-  playTestAyah();
+  // Fetch audio URLs from API — this guarantees they work!
+  fetch('https://api.alquran.cloud/v1/surah/1/' + reciter)
+    .then(function(res) { return res.json(); })
+    .then(function(json) {
+      if (json.code !== 200) throw new Error('API error');
 
-  function playTestAyah() {
-    if (!isTesting || testIdx >= TEST_AYAHS.length) {
-      stopTest();
-      return;
-    }
-    var url = cdn + '/' + reciter + '/' + TEST_AYAHS[testIdx] + '.mp3';
-    testAudioEl.src = url;
-    testAudioEl.play().then(function() {
-      document.getElementById('test-status').textContent = 
-        '▶ Al-Fatiha — Verset ' + (testIdx + 1) + '/7 — ' + RECITER_NAMES[reciter];
-    }).catch(function() {
+      // Extract audio URLs from API response
+      testAudioUrls = json.data.ayahs.map(function(a) { return a.audio; });
+
+      btn.classList.remove('loading-test');
+      btn.classList.add('playing-test');
+      btn.innerHTML = '🔊 En cours d\'écoute...';
+      document.getElementById('test-status').textContent = '▶ Al-Fatiha — ' + RECITER_NAMES[reciter];
+
+      playNextTest();
+    })
+    .catch(function() {
       document.getElementById('test-status').textContent = '⚠️ Ce récitateur n\'est pas disponible';
       stopTest();
     });
+}
+
+function playNextTest() {
+  if (!isTesting || testIdx >= testAudioUrls.length) {
+    if (isTesting) {
+      document.getElementById('test-status').textContent = '✅ Test terminé — Sourate Al-Fatiha complète !';
+    }
+    stopTest();
+    return;
   }
 
-  testAudioEl.onended = function() {
-    testIdx++;
-    if (testIdx < TEST_AYAHS.length && isTesting) {
-      playTestAyah();
-    } else {
-      document.getElementById('test-status').textContent = '✅ Test terminé — ' + RECITER_NAMES[reciter];
-      stopTest();
-    }
-  };
-
-  testAudioEl.onerror = function() {
-    document.getElementById('test-status').textContent = '⚠️ Audio non disponible pour ce récitateur';
+  testAudioEl.src = testAudioUrls[testIdx];
+  testAudioEl.play().then(function() {
+    document.getElementById('test-status').textContent =
+      '▶ Al-Fatiha — Verset ' + (testIdx + 1) + '/7';
+  }).catch(function() {
+    document.getElementById('test-status').textContent = '⚠️ Erreur de lecture audio';
     stopTest();
-  };
+  });
 }
+
+testAudioEl.addEventListener('ended', function() {
+  testIdx++;
+  playNextTest();
+});
+
+testAudioEl.addEventListener('error', function() {
+  if (isTesting) {
+    document.getElementById('test-status').textContent = '⚠️ Audio non disponible';
+    stopTest();
+  }
+});
 
 function stopTest() {
   isTesting = false;
   testAudioEl.pause();
-  testAudioEl.src = '';
-  document.getElementById('test-btn').classList.remove('playing-test');
-  document.getElementById('test-btn').innerHTML = '🔊 Tester le récitateur';
+  testAudioEl.removeAttribute('src');
+  testAudioUrls = [];
+  var btn = document.getElementById('test-btn');
+  btn.classList.remove('playing-test');
+  btn.classList.remove('loading-test');
+  btn.innerHTML = '🔊 Tester le récitateur';
 }
 
 /* ================================================
-   GREETING
+   GREETING / VOD / STATS
    ================================================ */
 function setGreeting() {
   var h = new Date().getHours();
@@ -444,9 +288,6 @@ function setGreeting() {
   document.getElementById('greeting').textContent = g;
 }
 
-/* ================================================
-   VERSE OF THE DAY
-   ================================================ */
 function setVerseOfDay() {
   var today = new Date().getDate() % VOD.length;
   var v = VOD[today];
@@ -455,23 +296,16 @@ function setVerseOfDay() {
   document.getElementById('vod-ref').textContent = '— ' + v.ref + ' —';
 }
 
-/* ================================================
-   STATS
-   ================================================ */
 function loadStats() {
   var done = JSON.parse(localStorage.getItem('q_done') || '[]');
   document.getElementById('stat-juz').textContent = done.length;
-
   var counters = JSON.parse(localStorage.getItem('q_counters') || '{}');
   var total = 0;
   var keys = Object.keys(counters);
-  for (var i = 0; i < keys.length; i++) { total += counters[keys[i]]; }
+  for (var i = 0; i < keys.length; i++) total += counters[keys[i]];
   document.getElementById('stat-dhikr').textContent = total;
 }
 
-/* ================================================
-   TOAST
-   ================================================ */
 function showToast(msg) {
   var t = document.getElementById('toast');
   t.textContent = msg;
@@ -482,22 +316,15 @@ function showToast(msg) {
 /* ================================================
    INIT
    ================================================ */
-(function init() {
-  // Restore saved settings
-  var savedReciter = localStorage.getItem('q_rec') || 'ar.alafasy';
-  var savedTrans = localStorage.getItem('q_tr') || 'fr.hamidullah';
-  document.getElementById('select-reciter').value = savedReciter;
-  document.getElementById('select-translation').value = savedTrans;
-
+(function() {
+  document.getElementById('select-reciter').value = localStorage.getItem('q_rec') || 'ar.alafasy';
+  document.getElementById('select-translation').value = localStorage.getItem('q_tr') || 'fr.hamidullah';
   setGreeting();
   setVerseOfDay();
   loadStats();
 })();
 
-// Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(function() {});
-}
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
 </script>
 </body>
 </html>
