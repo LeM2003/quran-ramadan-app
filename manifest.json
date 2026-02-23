@@ -1,12 +1,13 @@
 {
-  "name": "Al-Quran Al-Karim",
-  "short_name": "Quran",
-  "description": "Lisez et écoutez le Saint Coran avec traduction",
+  "name": "Muslim App — تطبيق المسلم",
+  "short_name": "Muslim App",
+  "description": "Coran, Invocations et Adhkar",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0a0d14",
   "theme_color": "#0a0d14",
   "orientation": "portrait",
+  "categories": ["education", "lifestyle"],
   "icons": [
     {
       "src": "icon-192.png",
