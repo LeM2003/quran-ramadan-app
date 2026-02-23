@@ -4,6 +4,7 @@
    ================================================================ */
 
 var LANG = {
+
   /* ============================
      INTERFACE GÉNÉRALE
      ============================ */
@@ -48,7 +49,7 @@ var LANG = {
     wo: 'Ñaanal yi'
   },
   card_duas_desc: {
-    fr: 'Duas et Adhkar du matin, soir, prière, repas...',
+    fr: 'Duas du matin, soir, prière, repas...',
     wo: 'Ñaan yi ci suba, ngoon, julli, lekk...'
   },
   card_dhikr_title: {
@@ -79,45 +80,13 @@ var LANG = {
     fr: 'Récitateur',
     wo: 'Kiy jàng Alkuraan bi'
   },
-  settings_reciter_choose: {
-    fr: 'Choisir le récitateur',
-    wo: 'Tànn kiy jàng bi'
-  },
   settings_translation: {
-    fr: 'Traduction',
-    wo: 'Tekki'
-  },
-  settings_translation_choose: {
-    fr: 'Langue de traduction',
-    wo: 'Làkku tekki bi'
+    fr: 'Traduction du Coran',
+    wo: 'Tekki Alkuraan bi'
   },
   settings_language: {
     fr: 'Langue de l\'application',
     wo: 'Làkku jëfandikukaay bi'
-  },
-  test_reciter: {
-    fr: '🔊 Tester le récitateur',
-    wo: '🔊 Siiwal kiy jàng bi'
-  },
-  test_stop: {
-    fr: '⏹ Stop',
-    wo: '⏹ Taxaw'
-  },
-  test_listening: {
-    fr: '🔊 En cours d\'écoute...',
-    wo: '🔊 Yaa ngi déglu...'
-  },
-  test_loading: {
-    fr: '⏳ Chargement...',
-    wo: '⏳ Yaa ngi yab...'
-  },
-  test_done: {
-    fr: '✅ Test terminé',
-    wo: '✅ Siiwal bi jeex na'
-  },
-  test_unavailable: {
-    fr: '⚠️ Ce récitateur n\'est pas disponible',
-    wo: '⚠️ Kiy jàng bii amul'
   },
   close: {
     fr: '✓ Fermer',
@@ -129,7 +98,7 @@ var LANG = {
      ============================ */
   stat_juz_read: {
     fr: 'Juz lus',
-    wo: 'Juz yi nga jàng'
+    wo: 'Juz yi jàng'
   },
   stat_surahs: {
     fr: 'Sourates',
@@ -207,18 +176,6 @@ var LANG = {
     fr: '🕌 Médinoise',
     wo: '🕌 Madiina'
   },
-
-  /* ============================
-     READER
-     ============================ */
-  resume_reading: {
-    fr: 'Reprendre la lecture',
-    wo: 'Gunni jàng bi'
-  },
-  continue: {
-    fr: 'Continuer →',
-    wo: 'Kontaan →'
-  },
   verse: {
     fr: 'Verset',
     wo: 'Aaya'
@@ -226,14 +183,6 @@ var LANG = {
   font_size: {
     fr: 'Taille',
     wo: 'Dayoo'
-  },
-  prev_juz: {
-    fr: '← Juz préc.',
-    wo: '← Juz bi jiitu'
-  },
-  next_juz: {
-    fr: 'Juz suiv. →',
-    wo: 'Juz bi toftal →'
   },
   prev_surah: {
     fr: '← Sourate préc.',
@@ -245,11 +194,11 @@ var LANG = {
   },
 
   /* ============================
-     AUDIO PLAYER
+     AUDIO
      ============================ */
   repeat_on: {
     fr: '🔁 Répétition activée',
-    wo: '🔁 Wàññi dees ko jéema'
+    wo: '🔁 Wàññi jàng'
   },
   repeat_off: {
     fr: '🔁 Désactivée',
@@ -260,12 +209,8 @@ var LANG = {
      SHARE
      ============================ */
   share_verse: {
-    fr: '📤 Partager ce verset',
-    wo: '📤 Séddoo aaya bii'
-  },
-  share_copy: {
-    fr: '📋 Copier',
-    wo: '📋 Duppi'
+    fr: '📤 Partager',
+    wo: '📤 Séddoo'
   },
   share_copied: {
     fr: '📋 Verset copié !',
@@ -291,30 +236,6 @@ var LANG = {
     fr: '🔄 Réessayer',
     wo: '🔄 Jéemaat'
   },
-  audio_error: {
-    fr: '⚠️ Erreur audio',
-    wo: '⚠️ Njuumte ci audio bi'
-  },
-  reciter_changed: {
-    fr: '🎙️ Récitateur changé',
-    wo: '🎙️ Kiy jàng bi soppiku na'
-  },
-  translation_changed: {
-    fr: '🌍 Traduction changée',
-    wo: '🌍 Tekki bi soppiku na'
-  },
-  translation_show: {
-    fr: '🌍 Traduction affichée',
-    wo: '🌍 Tekki bi fénn na'
-  },
-  translation_hide: {
-    fr: '🌍 Masquée',
-    wo: '🌍 Nëbb na'
-  },
-  juz_marked: {
-    fr: '✓ Juz {n} marqué lu',
-    wo: '✓ Juz {n} jàng nañu ko'
-  },
 
   /* ============================
      DUAS PAGE
@@ -337,57 +258,13 @@ var LANG = {
   },
 
   /* ============================
-     DHIKR PAGE
+     DUAS CATEGORIES
      ============================ */
-  dhikr_title: {
-    fr: 'Dhikr & Tasbih',
-    wo: 'Dikr ak Tasbih'
-  },
-  completed: {
-    fr: 'terminés',
-    wo: 'jeex nañu'
-  },
-  reset: {
-    fr: '🔄 Réinitialiser',
-    wo: '🔄 Dooraat'
-  },
-  reset_all: {
-    fr: '🔄 Réinitialiser tous les compteurs',
-    wo: '🔄 Dooraat waaraange yi yépp'
-  },
-  reset_confirm: {
-    fr: 'Réinitialiser tous les compteurs ?',
-    wo: 'Dooraat waaraange yi yépp ?'
-  },
-  dhikr_done: {
-    fr: '✅ BarakAllahu fik !',
-    wo: '✅ BarakAllahu fiik !'
-  },
-  all_done_title: {
-    fr: 'Tous les dhikr sont terminés !',
-    wo: 'Dikr yi yépp jeex nañu !'
-  },
-  all_done_sub: {
-    fr: 'Qu\'Allah accepte de nous et de vous.',
-    wo: 'Yàlla nanu ko nangu ci nun ak yéen.'
-  },
-
-  /* ============================
-     FOOTER
-     ============================ */
-  footer_credit: {
-    fr: 'Sadaqa Jariya',
-    wo: 'Sarax bu sore'
-  },
-
-  /* ============================
-     DUAS CATEGORIES (Names)
-     ============================ */
-  cat_morning_adhkar: {
+  cat_morning: {
     fr: 'Adhkar du Matin',
     wo: 'Dikru suba si'
   },
-  cat_evening_adhkar: {
+  cat_evening: {
     fr: 'Adhkar du Soir',
     wo: 'Dikru ngoon si'
   },
@@ -419,48 +296,69 @@ var LANG = {
     fr: 'Pour les Parents',
     wo: 'Ndey ak Baay'
   },
-  cat_general: {
+  cat_quran_duas: {
     fr: 'Duas du Coran',
     wo: 'Ñaanu Alkuraan'
   },
 
   /* ============================
-     DUAS TRANSLATIONS (Wolof)
+     DHIKR PAGE
      ============================ */
-  dua_morning_1: {
-    fr: 'Ô Allah, c\'est par Toi que nous arrivons au matin...',
-    wo: 'Yàlla, yaa nu suba, yaa nu ngoon, yaa nu dundal, yaa nu dee, te yaa nu ko dellu.'
+  dhikr_title: {
+    fr: 'Dhikr & Tasbih',
+    wo: 'Dikr ak Tasbih'
   },
-  dua_morning_2: {
-    fr: 'Nous voilà au matin et le royaume appartient à Allah...',
-    wo: 'Subaatu Yàlla la, te ñu ngi ko sant. Amul Yàlla ku dul Yàlla kenn, moom rekk, amul ay bokk, moom mooy Boroom nguuru bi, te moom mooy ñu sant...'
+  completed: {
+    fr: 'terminés',
+    wo: 'jeex nañu'
   },
-  dua_protection_1: {
-    fr: 'Ô Allah, je cherche refuge auprès de Toi contre les soucis...',
-    wo: 'Yàlla, dama la di ñaan nga aar ma ci xel-xuul ak naqar, ak bañ-ci-mën ak naaxari yaram, ak ñaax ak ragal, ak bor ak njël ak ay nit ñu ma dàq.'
+  reset: {
+    fr: '🔄 Réinitialiser',
+    wo: '🔄 Dooraat'
   },
-  dua_parents: {
-    fr: 'Seigneur, fais-leur miséricorde comme ils m\'ont élevé petit.',
-    wo: 'Boroom bi, yërëmal leen ni ñu ma toggaloon bi ma woon tuuti.'
+  reset_all: {
+    fr: '🔄 Tout réinitialiser',
+    wo: '🔄 Dooraat lépp'
   },
-  dua_forgiveness: {
-    fr: 'Je demande pardon à Allah le Très Grand...',
-    wo: 'Damay ñaan Yàlla mu baal ma, mu jot ma, moom mi nit amul, mooy dund gi ak taxawal gi...'
+  reset_confirm: {
+    fr: 'Réinitialiser tous les compteurs ?',
+    wo: 'Dooraat waaraange yi yépp ?'
+  },
+  dhikr_done: {
+    fr: '✅ BarakAllahu fik !',
+    wo: '✅ BarakAllahu fiik !'
+  },
+  all_done_title: {
+    fr: 'Tous les dhikr sont terminés !',
+    wo: 'Dikr yi yépp jeex nañu !'
+  },
+
+  /* ============================
+     FOOTER
+     ============================ */
+  footer_credit: {
+    fr: 'Sadaqa Jariya',
+    wo: 'Sarax bu sore'
   }
 };
 
+
 /* ================================================================
-   LANGUAGE SYSTEM
+   FONCTIONS DU SYSTÈME DE LANGUE
    ================================================================ */
+
+/* Lire la langue actuelle */
 function getCurrentLang() {
   return localStorage.getItem('q_lang') || 'fr';
 }
 
+/* Changer la langue */
 function setLang(lang) {
   localStorage.setItem('q_lang', lang);
   return lang;
 }
 
+/* Traduire une clé */
 function t(key) {
   var lang = getCurrentLang();
   if (LANG[key]) {
@@ -469,11 +367,52 @@ function t(key) {
   return key;
 }
 
-/* Get greeting based on time and language */
+/* Salutation selon l'heure */
 function getGreeting() {
   var h = new Date().getHours();
-  if (h >= 5 && h < 12) return t('home_greeting_morning');
+  if (h >= 5 && h < 12)  return t('home_greeting_morning');
   if (h >= 12 && h < 17) return t('home_greeting_afternoon');
   if (h >= 17 && h < 21) return t('home_greeting_evening');
   return t('home_greeting_night');
+}
+
+/* ================================================================
+   RAFRAÎCHIR TOUS LES TEXTES DE LA PAGE
+   Fonctionne sur TOUTES les pages (index, quran, duas, dhikr)
+   ================================================================ */
+function refreshLang() {
+  /* 1. Mettre à jour tous les éléments avec data-i18n */
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (LANG[key]) {
+      /* Pour les inputs (placeholder) */
+      if (el.tagName === 'INPUT') {
+        el.placeholder = t(key);
+      } else {
+        el.textContent = t(key);
+      }
+    }
+  });
+
+  /* 2. Mettre à jour le greeting si présent */
+  var greetEl = document.getElementById('greeting');
+  if (greetEl) greetEl.textContent = getGreeting();
+
+  /* 3. Mettre à jour les boutons de langue */
+  var btnFr = document.getElementById('langFr');
+  var btnWo = document.getElementById('langWo');
+  var lang = getCurrentLang();
+  if (btnFr) btnFr.classList.toggle('active', lang === 'fr');
+  if (btnWo) btnWo.classList.toggle('active', lang === 'wo');
+
+  /* 4. Appeler le callback spécifique à la page si défini */
+  if (typeof onLangChanged === 'function') {
+    onLangChanged();
+  }
+}
+
+/* Changer de langue (appelé par les boutons) */
+function switchLang(lang) {
+  setLang(lang);
+  refreshLang();
 }
