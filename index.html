@@ -32,6 +32,17 @@
 .section-divider{display:flex;align-items:center;gap:14px;max-width:500px;margin:10px auto 0;padding:0 20px;}
 .section-divider span{font-family:'Cinzel',serif;font-size:.7rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;}
 .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.12);}
+
+/* LANG: Language toggle styles */
+.lang-bar{display:flex;justify-content:center;align-items:center;gap:8px;padding:12px 16px;max-width:500px;margin:0 auto;}
+.lang-bar-label{font-size:.72rem;color:var(--text-dim);letter-spacing:.1em;}
+.lang-btn{padding:7px 20px;border:1px solid rgba(201,168,76,.25);border-radius:20px;background:transparent;color:var(--text-dim);font-size:.78rem;font-weight:600;cursor:pointer;transition:all .3s;font-family:inherit;}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold);}
+.lang-btn.active{background:linear-gradient(135deg,rgba(201,168,76,.25),rgba(201,168,76,.08));border-color:var(--gold);color:var(--gold);box-shadow:0 2px 12px rgba(201,168,76,.15);}
+.lang-options{display:flex;gap:10px;}
+.lang-option{flex:1;padding:12px 10px;border:1px solid rgba(201,168,76,.2);border-radius:10px;background:var(--deep);color:var(--text-dim);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;text-align:center;font-family:inherit;}
+.lang-option:hover{border-color:var(--gold);color:var(--gold);}
+.lang-option.active{border-color:var(--gold);background:rgba(201,168,76,.1);color:var(--gold);}
 </style>
 </head>
 <body>
@@ -49,18 +60,27 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- LANG: Language toggle bar -->
+<div class="lang-bar">
+  <span class="lang-bar-label">🌍</span>
+  <button class="lang-btn active" id="langFr" onclick="switchLang('fr')">🇫🇷 Français</button>
+  <button class="lang-btn" id="langWo" onclick="switchLang('wo')">🇸🇳 Wolof</button>
+</div>
+
 <!-- HOME HERO -->
 <div class="home-hero">
   <span class="moon-icon">🌙</span>
   <div class="home-greeting" id="greeting"></div>
   <div class="home-title">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
   <div class="home-app-name">Muslim App</div>
-  <div class="home-tagline">Coran · Invocations · Adhkar</div>
+  <!-- LANG: data-i18n added -->
+  <div class="home-tagline" data-i18n="app_tagline">Coran · Invocations · Adhkar</div>
 </div>
 
 <!-- VERSE OF THE DAY -->
 <div class="verse-of-day">
-  <div class="verse-of-day-label">✦ Verset du jour ✦</div>
+  <!-- LANG: data-i18n added -->
+  <div class="verse-of-day-label" data-i18n="verse_of_day">✦ Verset du jour ✦</div>
   <div class="verse-of-day-ar" id="vod-ar"></div>
   <div class="verse-of-day-tr" id="vod-tr"></div>
   <div class="verse-of-day-ref" id="vod-ref"></div>
@@ -71,38 +91,56 @@
   <a href="quran.html" class="feature-card card-quran">
     <span class="feature-icon">📖</span>
     <div class="feature-title-ar">القرآن الكريم</div>
-    <div class="feature-title">Le Coran</div>
-    <div class="feature-desc">Lisez et écoutez les 30 Juz et 114 Sourates</div>
+    <!-- LANG: data-i18n added -->
+    <div class="feature-title" data-i18n="card_quran_title">Le Coran</div>
+    <div class="feature-desc" data-i18n="card_quran_desc">Lisez et écoutez les 30 Juz et 114 Sourates</div>
   </a>
-    <a href="duas.html" class="feature-card card-duas">
+  <a href="duas.html" class="feature-card card-duas">
     <span class="feature-icon">🤲</span>
     <div class="feature-title-ar">الأدعية والأذكار</div>
-    <div class="feature-title">Invocations</div>
-    <div class="feature-desc">Duas et Adhkar du matin, soir, prière, repas...</div>
+    <!-- LANG: data-i18n added -->
+    <div class="feature-title" data-i18n="card_duas_title">Invocations</div>
+    <div class="feature-desc" data-i18n="card_duas_desc">Duas du matin, soir, prière, repas...</div>
   </a>
   <a href="Dhikrs.html" class="feature-card card-adhkar">
     <span class="feature-icon">📿</span>
     <div class="feature-title-ar">الذكر والتسبيح</div>
-    <div class="feature-title">Dhikr & Tasbih</div>
-    <div class="feature-desc">Compteur de dhikr : SubhanAllah, Alhamdulillah...</div>
+    <!-- LANG: data-i18n added -->
+    <div class="feature-title" data-i18n="card_dhikr_title">Dhikr & Tasbih</div>
+    <div class="feature-desc" data-i18n="card_dhikr_desc">Compteur de dhikr : SubhanAllah, Alhamdulillah...</div>
   </a>
   <div class="feature-card card-soon">
     <span class="feature-icon">🕌</span>
     <div class="feature-title-ar">المزيد</div>
-    <div class="feature-title">Bientôt</div>
-    <div class="feature-desc">Horaires de prière, Tasbih, Qibla...</div>
+    <!-- LANG: data-i18n added -->
+    <div class="feature-title" data-i18n="card_soon_title">Bientôt</div>
+    <div class="feature-desc" data-i18n="card_soon_desc">Horaires de prière, Tasbih, Qibla...</div>
     <span class="coming-badge">In Shaa Allah</span>
   </div>
 </div>
 
 <!-- SETTINGS -->
-<div class="section-divider"><span>⚙️ Paramètres</span></div>
+<!-- LANG: data-i18n added -->
+<div class="section-divider"><span data-i18n="settings">⚙️ Paramètres</span></div>
 
 <div class="settings-section">
+
+  <!-- LANG: New language card -->
   <div class="settings-card">
-    <div class="settings-card-title">🎙️ Récitateur</div>
+    <div class="settings-card-title" data-i18n="settings_language">🌍 Langue</div>
     <div class="setting-group">
-      <label class="setting-label">Choisir le récitateur</label>
+      <div class="lang-options">
+        <button class="lang-option active" id="setFr" onclick="switchLang('fr')">🇫🇷 Français</button>
+        <button class="lang-option" id="setWo" onclick="switchLang('wo')">🇸🇳 Wolof</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-card">
+    <!-- LANG: data-i18n added -->
+    <div class="settings-card-title" data-i18n="settings_reciter">🎙️ Récitateur</div>
+    <div class="setting-group">
+      <label class="setting-label" id="label-reciter">Choisir le récitateur</label>
       <select class="setting-select" id="select-reciter" onchange="onReciterChange(this.value)">
         <option value="ar.alafasy">Mishary Rashid Alafasy</option>
         <option value="ar.abdulbasitmurattal">Abdul Basit (Murattal)</option>
@@ -118,16 +156,18 @@
     </div>
     <div class="test-reciter-wrap">
       <button class="test-btn" id="test-btn" onclick="testReciter()">🔊 Tester le récitateur</button>
-      <button class="stop-btn" onclick="stopTest()">⏹ Stop</button>
+      <!-- LANG: data-i18n added -->
+      <button class="stop-btn" onclick="stopTest()" data-i18n="test_stop">⏹ Stop</button>
     </div>
     <div class="test-status" id="test-status"></div>
     <div class="reciter-preview">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ ۝ ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ</div>
   </div>
 
   <div class="settings-card">
-    <div class="settings-card-title">🌍 Traduction</div>
+    <!-- LANG: data-i18n added -->
+    <div class="settings-card-title" data-i18n="settings_translation">🌍 Traduction</div>
     <div class="setting-group">
-      <label class="setting-label">Langue de traduction</label>
+      <label class="setting-label" id="label-translation">Langue de traduction</label>
       <select class="setting-select" id="select-translation" onchange="onTranslationChange(this.value)">
         <option value="fr.hamidullah">🇫🇷 Français — Hamidullah</option>
         <option value="en.sahih">🇬🇧 English — Sahih International</option>
@@ -139,18 +179,23 @@
 
 <!-- STATS -->
 <div class="home-stats">
-  <div class="stat-item"><div class="stat-num" id="stat-juz">0</div><div class="stat-label">Juz lus</div></div>
-  <div class="stat-item"><div class="stat-num">114</div><div class="stat-label">Sourates</div></div>
-  <div class="stat-item"><div class="stat-num">6236</div><div class="stat-label">Versets</div></div>
-  <div class="stat-item"><div class="stat-num" id="stat-dhikr">0</div><div class="stat-label">Adhkar</div></div>
+  <!-- LANG: data-i18n added to all stat labels -->
+  <div class="stat-item"><div class="stat-num" id="stat-juz">0</div><div class="stat-label" data-i18n="stat_juz_read">Juz lus</div></div>
+  <div class="stat-item"><div class="stat-num">114</div><div class="stat-label" data-i18n="stat_surahs">Sourates</div></div>
+  <div class="stat-item"><div class="stat-num">6236</div><div class="stat-label" data-i18n="stat_verses">Versets</div></div>
+  <div class="stat-item"><div class="stat-num" id="stat-dhikr">0</div><div class="stat-label" data-i18n="stat_dhikr">Adhkar</div></div>
 </div>
 
 <footer>
   <div class="footer-dua">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ 🤲</div>
-  <div class="footer-credit">Made with ❤️ by <a href="https://github.com/lem2003" target="_blank">Mouhamadou</a> · Sadaqa Jariya</div>
+  <!-- LANG: wrapped Sadaqa Jariya in span with data-i18n -->
+  <div class="footer-credit">Made with ❤️ by <a href="https://github.com/lem2003" target="_blank">Mouhamadou</a> · <span data-i18n="footer_credit">Sadaqa Jariya</span></div>
 </footer>
 
 <audio id="test-audio" preload="none"></audio>
+
+<!-- LANG: Load language system BEFORE main script -->
+<script src="lang.js"></script>
 
 <script>
 /* ================================================
@@ -178,6 +223,25 @@ var VOD = [
 ];
 
 /* ================================================
+   LANG: Extend LANG with page-specific translations
+   (keys not in lang.js — added here to keep lang.js clean)
+   ================================================ */
+LANG.settings_reciter    = {fr:'🎙️ Récitateur',        wo:'🎙️ Kiy jàng Alkuraan bi'};
+LANG.settings_translation = {fr:'🌍 Traduction',        wo:'🌍 Tekki'};
+LANG.settings_language   = {fr:'🌍 Langue',             wo:'🌍 Làkk'};
+LANG.choose_reciter      = {fr:'Choisir le récitateur', wo:'Tànn kiy jàng bi'};
+LANG.translation_label   = {fr:'Langue de traduction',  wo:'Làkku tekki bi'};
+LANG.test_reciter        = {fr:'🔊 Tester le récitateur', wo:'🔊 Siiwal kiy jàng bi'};
+LANG.test_stop           = {fr:'⏹ Stop',                wo:'⏹ Taxaw'};
+LANG.test_loading_text   = {fr:'⏳ Chargement...',       wo:'⏳ Yaa ngi yab...'};
+LANG.test_listening      = {fr:'🔊 En cours d\'écoute...', wo:'🔊 Yaa ngi déglu...'};
+LANG.test_done           = {fr:'✅ Test terminé — Al-Fatiha complète !', wo:'✅ Siiwal bi jeex na — Faatiha !'};
+LANG.test_error          = {fr:'⚠️ Ce récitateur n\'est pas disponible', wo:'⚠️ Kiy jàng bii amul'};
+LANG.test_audio_error    = {fr:'⚠️ Erreur de lecture audio', wo:'⚠️ Njuumte ci audio bi'};
+LANG.loading_fatiha      = {fr:'Chargement de Al-Fatiha...', wo:'Yaa ngi yab Suratul Faatiha...'};
+LANG.playing_fatiha      = {fr:'▶ Al-Fatiha — Verset',  wo:'▶ Faatiha — Aaya'};
+
+/* ================================================
    SETTINGS
    ================================================ */
 function onReciterChange(val) {
@@ -193,7 +257,7 @@ function onTranslationChange(val) {
 }
 
 /* ================================================
-   RECITER TEST — Uses API for guaranteed URLs!
+   RECITER TEST — LANG: uses t() for all messages
    ================================================ */
 var testAudioEl = document.getElementById('test-audio');
 var testAudioUrls = [];
@@ -208,27 +272,22 @@ function testReciter() {
 
   var btn = document.getElementById('test-btn');
   btn.classList.add('loading-test');
-  btn.innerHTML = '⏳ Chargement...';
-  document.getElementById('test-status').textContent = 'Chargement de Al-Fatiha...';
+  btn.innerHTML = t('test_loading_text');
+  document.getElementById('test-status').textContent = t('loading_fatiha');
 
-  // Fetch audio URLs from API — this guarantees they work!
   fetch('https://api.alquran.cloud/v1/surah/1/' + reciter)
     .then(function(res) { return res.json(); })
     .then(function(json) {
       if (json.code !== 200) throw new Error('API error');
-
-      // Extract audio URLs from API response
       testAudioUrls = json.data.ayahs.map(function(a) { return a.audio; });
-
       btn.classList.remove('loading-test');
       btn.classList.add('playing-test');
-      btn.innerHTML = '🔊 En cours d\'écoute...';
+      btn.innerHTML = t('test_listening');
       document.getElementById('test-status').textContent = '▶ Al-Fatiha — ' + RECITER_NAMES[reciter];
-
       playNextTest();
     })
     .catch(function() {
-      document.getElementById('test-status').textContent = '⚠️ Ce récitateur n\'est pas disponible';
+      document.getElementById('test-status').textContent = t('test_error');
       stopTest();
     });
 }
@@ -236,18 +295,17 @@ function testReciter() {
 function playNextTest() {
   if (!isTesting || testIdx >= testAudioUrls.length) {
     if (isTesting) {
-      document.getElementById('test-status').textContent = '✅ Test terminé — Sourate Al-Fatiha complète !';
+      document.getElementById('test-status').textContent = t('test_done');
     }
     stopTest();
     return;
   }
-
   testAudioEl.src = testAudioUrls[testIdx];
   testAudioEl.play().then(function() {
     document.getElementById('test-status').textContent =
-      '▶ Al-Fatiha — Verset ' + (testIdx + 1) + '/7';
+      t('playing_fatiha') + ' ' + (testIdx + 1) + '/7';
   }).catch(function() {
-    document.getElementById('test-status').textContent = '⚠️ Erreur de lecture audio';
+    document.getElementById('test-status').textContent = t('test_audio_error');
     stopTest();
   });
 }
@@ -259,7 +317,7 @@ testAudioEl.addEventListener('ended', function() {
 
 testAudioEl.addEventListener('error', function() {
   if (isTesting) {
-    document.getElementById('test-status').textContent = '⚠️ Audio non disponible';
+    document.getElementById('test-status').textContent = t('test_error');
     stopTest();
   }
 });
@@ -272,22 +330,33 @@ function stopTest() {
   var btn = document.getElementById('test-btn');
   btn.classList.remove('playing-test');
   btn.classList.remove('loading-test');
-  btn.innerHTML = '🔊 Tester le récitateur';
+  btn.innerHTML = t('test_reciter');
 }
 
 /* ================================================
-   GREETING / VOD / STATS
+   GREETING — LANG: supports FR and Wolof
    ================================================ */
 function setGreeting() {
   var h = new Date().getHours();
+  var lang = getCurrentLang();
   var g = '';
-  if (h >= 5 && h < 12) g = '🌅 صباح الخير — Bonjour';
-  else if (h >= 12 && h < 17) g = '☀️ مساء الخير — Bon après-midi';
-  else if (h >= 17 && h < 21) g = '🌆 مساء النور — Bonsoir';
-  else g = '🌙 طابت ليلتكم — Bonne nuit';
+  if (lang === 'wo') {
+    if (h >= 5 && h < 12)       g = '🌅 صباح الخير — Jàmm nga fanaan';
+    else if (h >= 12 && h < 17) g = '☀️ مساء الخير — Jàmm nga yendoo';
+    else if (h >= 17 && h < 21) g = '🌆 مساء النور — Jàmm nga yendoo';
+    else                        g = '🌙 طابت ليلتكم — Fanaanal jàmm';
+  } else {
+    if (h >= 5 && h < 12)       g = '🌅 صباح الخير — Bonjour';
+    else if (h >= 12 && h < 17) g = '☀️ مساء الخير — Bon après-midi';
+    else if (h >= 17 && h < 21) g = '🌆 مساء النور — Bonsoir';
+    else                        g = '🌙 طابت ليلتكم — Bonne nuit';
+  }
   document.getElementById('greeting').textContent = g;
 }
 
+/* ================================================
+   VOD / STATS / TOAST (inchangé)
+   ================================================ */
 function setVerseOfDay() {
   var today = new Date().getDate() % VOD.length;
   var v = VOD[today];
@@ -307,10 +376,32 @@ function loadStats() {
 }
 
 function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function() { t.classList.remove('show'); }, 3000);
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 3000);
+}
+
+/* ================================================
+   LANG: Callback when language changes
+   (called automatically by switchLang in lang.js)
+   ================================================ */
+function onLangChanged() {
+  var lang = getCurrentLang();
+  /* Update settings language buttons */
+  var sf = document.getElementById('setFr');
+  var sw = document.getElementById('setWo');
+  if (sf) sf.classList.toggle('active', lang === 'fr');
+  if (sw) sw.classList.toggle('active', lang === 'wo');
+  /* Update greeting in new language */
+  setGreeting();
+  /* Update labels that use JS (not data-i18n) */
+  document.getElementById('label-reciter').textContent = t('choose_reciter');
+  document.getElementById('label-translation').textContent = t('translation_label');
+  /* Update test button (only if not currently testing) */
+  if (!isTesting) {
+    document.getElementById('test-btn').innerHTML = t('test_reciter');
+  }
 }
 
 /* ================================================
@@ -322,6 +413,7 @@ function showToast(msg) {
   setGreeting();
   setVerseOfDay();
   loadStats();
+  refreshLang(); /* LANG: Apply saved language on load */
 })();
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function(){});
